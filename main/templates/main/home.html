@@ -1,0 +1,36 @@
+{% extends 'main/layout.html' %}
+
+{% block contents %}      
+      <div class="container">
+      <div class="jumbotron">
+          <h1 class="display-4">django 리마인드-마스터반</h1>
+          <p class="lead">django 리마인드-마스터반 수업 때 만든 거</p>
+          <hr class="my-4">
+          <a class="btn btn-primary btn-lg" href="{% url 'board_view' %}" role="button">게시글 보러가기</a>
+      </div>
+      </div>
+      {% if request.session.user == None %}
+      <!-- user 가 없을 때만 로그인 폼이 보이게 하는거 -->
+      <div class="container">
+        <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">User Id</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter User Id" name = "user_id">
+            <small id="emailHelp" class="form-text text-muted">사용자의 아이디를 입력해주세요</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form></div>
+        {% endif %}
+        <!-- <div class="container">
+        {% if request.session.user != None %}
+        <form action="{% url 'logout' %}" method="POST"> {% csrf_token %}
+        <button type="submit" class="btn btn-primary">로그아웃</button>
+        </form>
+      </div>
+      {% endif %} -->
+
+{% endblock %}
